@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Admin Panel - Auto Income BD</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -17,68 +18,84 @@ body{
     background:#f1f3f6;
 }
 
-.admin-container{
+/* LOGIN */
+
+.login-page{
+    width:100%;
+    height:100vh;
     display:flex;
-    min-height:100vh;
-}
-
-/* Sidebar */
-
-.sidebar{
-    width:250px;
+    justify-content:center;
+    align-items:center;
     background:#6200ee;
-    color:#fff;
-    padding:20px;
 }
 
-.sidebar h2{
-    margin-bottom:30px;
+.login-box{
+    width:350px;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+}
+
+.login-box h2{
     text-align:center;
+    margin-bottom:25px;
+    color:#6200ee;
 }
 
-.menu{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+.input-group{
+    margin-bottom:15px;
 }
 
-.menu button{
-    padding:14px;
+.input-group label{
+    display:block;
+    margin-bottom:5px;
+    font-size:14px;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+
+.login-btn{
+    width:100%;
+    padding:13px;
     border:none;
     border-radius:10px;
-    background:#7c3aed;
+    background:#6200ee;
     color:#fff;
-    font-size:15px;
+    font-size:16px;
     cursor:pointer;
-    transition:0.3s;
 }
 
-.menu button:hover{
-    background:#8b5cf6;
+/* PANEL */
+
+.hidden{
+    display:none;
 }
 
-/* Main */
-
-.main{
-    flex:1;
+.admin-panel{
     padding:20px;
 }
 
-.topbar{
+.header{
     background:#fff;
-    padding:15px 20px;
-    border-radius:12px;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:20px;
     box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
-.topbar h1{
-    font-size:22px;
+.header h1{
     color:#6200ee;
 }
+
+/* CARDS */
 
 .cards{
     display:grid;
@@ -96,8 +113,8 @@ body{
 
 .card h3{
     font-size:15px;
-    margin-bottom:10px;
     color:#666;
+    margin-bottom:10px;
 }
 
 .card .value{
@@ -106,7 +123,7 @@ body{
     color:#6200ee;
 }
 
-/* Table */
+/* TABLE */
 
 .table-box{
     background:#fff;
@@ -116,28 +133,52 @@ body{
     overflow:auto;
 }
 
+.table-box h2{
+    margin-bottom:15px;
+    color:#6200ee;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
-    margin-top:15px;
 }
 
 table th{
     background:#6200ee;
     color:#fff;
     padding:12px;
-    text-align:left;
+    font-size:14px;
 }
 
 table td{
     padding:12px;
     border-bottom:1px solid #eee;
+    font-size:14px;
+}
+
+/* BUTTONS */
+
+.action-btn{
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    color:#fff;
+    cursor:pointer;
+    margin:2px;
+}
+
+.accept{
+    background:#00c853;
+}
+
+.cancel{
+    background:#ff1744;
 }
 
 .status{
     padding:6px 12px;
     border-radius:20px;
-    font-size:13px;
+    font-size:12px;
     font-weight:bold;
 }
 
@@ -151,95 +192,25 @@ table td{
     color:#155724;
 }
 
-.action-btn{
-    border:none;
-    padding:8px 12px;
-    border-radius:8px;
-    cursor:pointer;
-    color:#fff;
-    font-size:13px;
-}
-
-.approve{
-    background:#00c853;
-}
-
-.delete{
-    background:#ff1744;
-}
-
-/* Login */
-
-.login-page{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#6200ee;
-}
-
-.login-box{
-    background:#fff;
-    width:350px;
-    padding:30px;
-    border-radius:15px;
-}
-
-.login-box h2{
-    text-align:center;
-    margin-bottom:25px;
-    color:#6200ee;
-}
-
-.input-group{
-    margin-bottom:15px;
-}
-
-.input-group label{
-    display:block;
-    margin-bottom:6px;
-    font-size:14px;
-}
-
-.input-group input{
-    width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:10px;
-}
-
-.login-btn{
-    width:100%;
-    padding:13px;
-    border:none;
-    background:#6200ee;
-    color:#fff;
-    border-radius:10px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.hidden{
-    display:none;
+.cancelled{
+    background:#f8d7da;
+    color:#721c24;
 }
 
 @media(max-width:768px){
 
-    .admin-container{
+    .header{
         flex-direction:column;
-    }
-
-    .sidebar{
-        width:100%;
+        gap:10px;
     }
 
 }
+
 </style>
 </head>
 <body>
 
-<!-- Login -->
+<!-- LOGIN -->
 
 <div class="login-page" id="loginPage">
 
@@ -249,15 +220,15 @@ table td{
 
         <div class="input-group">
             <label>Username</label>
-            <input type="text" id="adminUser" placeholder="Enter username">
+            <input type="text" id="username">
         </div>
 
         <div class="input-group">
             <label>Password</label>
-            <input type="password" id="adminPass" placeholder="Enter password">
+            <input type="password" id="password">
         </div>
 
-        <button class="login-btn" onclick="adminLogin()">
+        <button class="login-btn" onclick="login()">
             Login
         </button>
 
@@ -265,129 +236,141 @@ table td{
 
 </div>
 
-<!-- Admin Panel -->
+<!-- ADMIN PANEL -->
 
-<div class="admin-container hidden" id="adminPanel">
+<div class="admin-panel hidden" id="adminPanel">
 
-    <!-- Sidebar -->
+    <!-- HEADER -->
 
-    <div class="sidebar">
+    <div class="header">
+        <h1>Auto Income BD - Admin Panel</h1>
 
-        <h2>Admin Panel</h2>
+        <button class="action-btn cancel" onclick="logout()">
+            Logout
+        </button>
+    </div>
 
-        <div class="menu">
-            <button>Dashboard</button>
-            <button>Users</button>
-            <button>Withdraw</button>
-            <button>Ads Control</button>
-            <button onclick="logout()">Logout</button>
+    <!-- DASHBOARD -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>টোটাল ইউজার</h3>
+            <div class="value">12,500</div>
+        </div>
+
+        <div class="card">
+            <h3>টোটাল ইউজার আয়</h3>
+            <div class="value">৳ 2,43,000</div>
+        </div>
+
+        <div class="card">
+            <h3>টোটাল ইউজার উত্তোলন</h3>
+            <div class="value">৳ 1,92,500</div>
+        </div>
+
+        <div class="card">
+            <h3>দৈনিক ইউজার আয়</h3>
+            <div class="value">৳ 5,250</div>
+        </div>
+
+        <div class="card">
+            <h3>দৈনিক ইউজার উত্তোলন</h3>
+            <div class="value">৳ 3,850</div>
         </div>
 
     </div>
 
-    <!-- Main -->
+    <!-- PAYMENT TABLE -->
 
-    <div class="main">
+    <div class="table-box">
 
-        <div class="topbar">
-            <h1>Auto Income BD Admin</h1>
-            <h3 id="dateTime"></h3>
-        </div>
+        <h2>পেমেন্ট কমপ্লিট / পেন্ডিং</h2>
 
-        <!-- Cards -->
+        <table>
 
-        <div class="cards">
+            <thead>
 
-            <div class="card">
-                <h3>Total Users</h3>
-                <div class="value" id="totalUsers">12500</div>
-            </div>
+                <tr>
+                    <th>ইউজার নাম</th>
+                    <th>ইউজার আইডি</th>
+                    <th>মোট ব্যালেন্স</th>
+                    <th>উত্তোলন</th>
+                    <th>মেথড</th>
+                    <th>নাম্বার</th>
+                    <th>স্ট্যাটাস</th>
+                    <th>একশন</th>
+                </tr>
 
-            <div class="card">
-                <h3>Total Withdraw</h3>
-                <div class="value">৳ 2,43,000</div>
-            </div>
+            </thead>
 
-            <div class="card">
-                <h3>Total Ads</h3>
-                <div class="value">66,000</div>
-            </div>
+            <tbody id="paymentTable">
 
-            <div class="card">
-                <h3>Pending Withdraw</h3>
-                <div class="value" id="pendingCount">3</div>
-            </div>
+                <tr>
 
-        </div>
+                    <td>Rahim</td>
+                    <td>#1025</td>
+                    <td>৳ 850</td>
+                    <td>৳ 500</td>
+                    <td>Bkash</td>
+                    <td>017XXXXXXXX</td>
 
-        <!-- Withdraw Table -->
+                    <td>
+                        <span class="status pending">
+                            Pending
+                        </span>
+                    </td>
 
-        <div class="table-box">
+                    <td>
 
-            <h2>Pending Withdraw Requests</h2>
+                        <button class="action-btn accept"
+                        onclick="acceptPayment(this)">
+                            Accept
+                        </button>
 
-            <table>
+                        <button class="action-btn cancel"
+                        onclick="cancelPayment(this)">
+                            বাতিল
+                        </button>
 
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Wallet</th>
-                        <th>Number</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+                    </td>
 
-                <tbody id="withdrawTable">
+                </tr>
 
-                    <tr>
-                        <td>Rahim</td>
-                        <td>Bkash</td>
-                        <td>017XXXXXXXX</td>
-                        <td>৳ 500</td>
-                        <td>
-                            <span class="status pending">
-                                Pending
-                            </span>
-                        </td>
-                        <td>
-                            <button class="action-btn approve" onclick="approve(this)">
-                                Approve
-                            </button>
+                <tr>
 
-                            <button class="action-btn delete" onclick="removeRow(this)">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
+                    <td>Karim</td>
+                    <td>#1050</td>
+                    <td>৳ 650</td>
+                    <td>৳ 300</td>
+                    <td>Nagad</td>
+                    <td>018XXXXXXXX</td>
 
-                    <tr>
-                        <td>Karim</td>
-                        <td>Nagad</td>
-                        <td>018XXXXXXXX</td>
-                        <td>৳ 350</td>
-                        <td>
-                            <span class="status pending">
-                                Pending
-                            </span>
-                        </td>
-                        <td>
-                            <button class="action-btn approve" onclick="approve(this)">
-                                Approve
-                            </button>
+                    <td>
+                        <span class="status pending">
+                            Pending
+                        </span>
+                    </td>
 
-                            <button class="action-btn delete" onclick="removeRow(this)">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
+                    <td>
 
-                </tbody>
+                        <button class="action-btn accept"
+                        onclick="acceptPayment(this)">
+                            Accept
+                        </button>
 
-            </table>
+                        <button class="action-btn cancel"
+                        onclick="cancelPayment(this)">
+                            বাতিল
+                        </button>
 
-        </div>
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
 
     </div>
 
@@ -395,65 +378,72 @@ table td{
 
 <script>
 
-/* Login */
+/* LOGIN */
 
-function adminLogin(){
+function login(){
 
-    let user = document.getElementById("adminUser").value;
-    let pass = document.getElementById("adminPass").value;
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
 
     if(user === "admin" && pass === "12345"){
 
-        document.getElementById("loginPage").classList.add("hidden");
-        document.getElementById("adminPanel").classList.remove("hidden");
+        document.getElementById("loginPage")
+        .classList.add("hidden");
+
+        document.getElementById("adminPanel")
+        .classList.remove("hidden");
 
     }else{
-        alert("Wrong Username or Password");
+
+        alert("ভুল Username অথবা Password");
+
     }
 
 }
 
-/* Logout */
+/* LOGOUT */
 
 function logout(){
 
-    document.getElementById("adminPanel").classList.add("hidden");
-    document.getElementById("loginPage").classList.remove("hidden");
+    document.getElementById("adminPanel")
+    .classList.add("hidden");
+
+    document.getElementById("loginPage")
+    .classList.remove("hidden");
 
 }
 
-/* Approve */
+/* ACCEPT PAYMENT */
 
-function approve(btn){
+function acceptPayment(btn){
 
     let row = btn.parentElement.parentElement;
 
-    row.querySelector(".status").innerHTML = "Success";
-    row.querySelector(".status").classList.remove("pending");
-    row.querySelector(".status").classList.add("success");
+    let status = row.querySelector(".status");
+
+    status.innerHTML = "Completed";
+
+    status.classList.remove("pending");
+
+    status.classList.add("success");
 
 }
 
-/* Delete */
+/* CANCEL PAYMENT */
 
-function removeRow(btn){
+function cancelPayment(btn){
 
-    btn.parentElement.parentElement.remove();
+    let row = btn.parentElement.parentElement;
 
-}
+    let status = row.querySelector(".status");
 
-/* Date Time */
+    status.innerHTML = "Cancelled";
 
-function updateTime(){
+    status.classList.remove("pending");
 
-    let now = new Date();
-
-    document.getElementById("dateTime").innerHTML =
-        now.toLocaleString();
+    status.classList.add("cancelled");
 
 }
-
-setInterval(updateTime,1000);
 
 </script>
 
